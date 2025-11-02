@@ -3,7 +3,38 @@
 
 ---
 
-## 🧩 Program: Corrected Version of Syntax Error Example 3
+## 🧩 Problem
+Write a Java program to assign a value to a variable and display it.  
+However, if you forget to provide the **right-hand side value** during assignment, the compiler should show a **syntax error**.
+
+---
+
+## ❌ Incorrect Code
+```java
+class SyntaxErrorExample3 {
+    public static void main(String[] args) {
+        int max;
+        max = ;  // Missing right-hand side value
+        System.out.println("Maximum value is: " + max);
+    }
+}
+```
+
+---
+
+## 💬 Error Explanation
+In Java, the **assignment operator (`=`)** must always have a **valid value or expression** on its right-hand side.  
+The statement `max = ;` is incomplete — the compiler expects a value but finds a semicolon instead.  
+
+This causes a **compile-time syntax error** such as:
+```
+error: not a statement
+error: ';' expected
+```
+
+---
+
+## ✅ Correct Code
 ```java
 package Example3SyntaxError;
 
@@ -18,20 +49,9 @@ public class SyntaxErrorExample3Solution {
 
 ---
 
-## 💬 Explanation
-In the earlier incorrect version:
-```java
-max = ;
-```
-The **assignment operator (`=`)** had no value or expression on the right-hand side.  
-In Java, every assignment statement must have **a valid value or expression** after `=`.  
-The compiler throws a **syntax error** such as:
-```
-error: not a statement
-error: ';' expected
-```
-
-After adding a valid value (`max = 100;`), the program compiles and runs correctly.
+## 🧾 Explanation of Solution
+After assigning a valid value (`100`) to the variable `max`,  
+the program now compiles and executes successfully, printing the expected output.
 
 ---
 
@@ -43,6 +63,6 @@ Maximum value is: 100
 ---
 
 ## 🧠 Key Takeaway
-- Every assignment statement must include both sides: **variable = value**.  
-- Omitting the right-hand side value results in a **compile-time syntax error**.  
-- Always verify your assignment statements before compiling.
+- Each **assignment statement** must have both a variable and a value.  
+- Missing the right-hand side value results in a **compile-time syntax error**.  
+- Always ensure your statements are **complete and meaningful** before compilation.
