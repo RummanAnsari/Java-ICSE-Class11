@@ -13,3 +13,5 @@ public  class Example10RuntimeErrorExample1Solution {
         }
     }
 }
+
+// Code added to handle runtime error (division by zero)
