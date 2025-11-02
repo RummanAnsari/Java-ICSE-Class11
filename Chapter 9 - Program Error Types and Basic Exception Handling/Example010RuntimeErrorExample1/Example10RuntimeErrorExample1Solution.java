@@ -1,4 +1,4 @@
-package Example10RuntimeErrorExample1;
+package Example010RuntimeErrorExample1;
 
 public  class Example10RuntimeErrorExample1Solution {
     public static void main(String[] args) {

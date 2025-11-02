@@ -1,4 +1,4 @@
-package Example9HandlingCompileTimeErrors;
+package Example009HandlingCompileTimeErrors;
 
 public class Example9HandlingCompileTimeErrorsSolution {
     void m(int n) {

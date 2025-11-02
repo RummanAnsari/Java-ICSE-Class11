@@ -1,4 +1,4 @@
-package Example2SyntaxError;
+package Example002SyntaxError;
 
 public class SyntaxErrorExample2Solution {
     public static void main(String[] args) {

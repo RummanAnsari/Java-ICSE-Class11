@@ -1,4 +1,4 @@
-package Example7SemanticErrorExample2;
+package Example007SemanticErrorExample2;
 
 public class Example7SemanticErrorExample2Solution {
     public static void main(String[] args) {
