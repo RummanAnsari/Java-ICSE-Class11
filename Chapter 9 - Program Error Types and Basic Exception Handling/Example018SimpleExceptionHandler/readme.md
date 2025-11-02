@@ -29,27 +29,25 @@ import java.io.*;
 
 public class Example018SimpleExceptionHandler {
     public static void main(String[] args) {
-        DataInputStream file = null;
+        // ✅ Updated to use absolute path for proper file access
+        String filePath = "E:\\6. Study Material\\class 1 -12\\CLASS11-ISC-computer\\Java-ICSE-Class11\\Chapter 9 - Program Error Types and Basic Exception Handling\\Example018SimpleExceptionHandler\\sample.txt";
 
-        try {
-            // 🔒 Attempt to open a file for reading
-            file = new DataInputStream(new FileInputStream("sample.txt"));
-            System.out.println("File opened successfully!");
-        } 
-        catch (Exception e) {
-            // ⚠️ Catch any kind of exception that occurs
-            System.out.println("❌ Exception occurred while handling the file: " + e);
+        File file = new File(filePath);
+        System.out.println("Looking for file at: " + file.getAbsolutePath());
+
+        if (!file.exists()) {
+            System.out.println("❌ Error: The file 'sample.txt' was not found at the above location.");
+            return;
         }
-        finally {
-            // ✅ Ensures cleanup or closure
-            try {
-                if (file != null) {
-                    file.close();
-                    System.out.println("File closed successfully!");
-                }
-            } catch (IOException e) {
-                System.out.println("⚠️ Error closing file: " + e);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            System.out.println("✅ File opened successfully! Reading contents:\n");
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
             }
+        } catch (IOException e) {
+            System.out.println("⚠️ Error while reading the file: " + e.getMessage());
         }
     }
 }
@@ -75,11 +73,13 @@ public class Example018SimpleExceptionHandler {
 ## ✅ Output  
 If `sample.txt` exists:
 ```
-File opened successfully!
-File closed successfully!
+Looking for file at: E:\6. Study Material\class 1 -12\CLASS11-ISC-computer\Java-ICSE-Class11\Chapter 9 - Program Error Types and Basic Exception Handling\Example018SimpleExceptionHandler\sample.txt
+✅ File opened successfully! Reading contents:
+
+<Contents of sample.txt>
 ```
 
 If `sample.txt` does not exist:
 ```
-❌ Exception occurred while handling the file: java.io.FileNotFoundException: sample.txt (The system cannot find the file specified)
+❌ Error: The file 'sample.txt' was not found at the above location.
 ```
