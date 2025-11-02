@@ -1,6 +1,6 @@
 package Example4SyntaxError;
 
-public class SyantaxErrorExample4 {
+public class SyntaxErrorExample4 {
         public static void main(String[] args) {
         // int default = 10;  // 'default' is a reserved keyword in Java
         // System.out.println("Value: " + default);
