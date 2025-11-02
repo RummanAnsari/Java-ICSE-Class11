@@ -1,11 +1,13 @@
-package Example5SyantaxError;
+package Example5SyntaxError;
 
-public class SyantaxErrorExample5Solution {
+public class SyantaxErrorExample5 {
     static int max(int i, int j) {
         if (i > j)
-            return i;  // Returns an integer value
+            // return;  // Missing return value
+            return i;
         else
-            return j;  // Returns an integer value
+            // return;  // Missing return value
+            return j;
     }
 
     public static void main(String[] args) {
