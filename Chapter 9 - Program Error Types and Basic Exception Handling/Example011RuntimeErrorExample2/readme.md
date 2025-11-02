@@ -1,16 +1,11 @@
-# 💥 Run-Time Error Example 1 – File Does Not Exist  
-**Topic:** Demonstrating `FileNotFoundException` when trying to open a missing file using `FileReader`
+# 💥 Run-Time Error Example 2 – File Handling with Absolute Path  
+**Topic:** Handling `IOException` and avoiding `FileNotFoundException` by using an **absolute file path** and **safe resource handling** with `try-with-resources`.
 
 ---
 
 ## 🧩 Problem
-Write a Java program that tries to **open and read a file named `names.txt`** using `FileReader`.  
-If the file does not exist in the specified path, Java will throw a **Run-Time Error**:
-```
-java.io.FileNotFoundException
-```
-
-This error occurs **during execution**, not at compile time.
+Write a Java program that tries to **open and read a file named `names.txt`** located in a specific folder.  
+If the file is missing or unreadable, the program should handle it gracefully without crashing.
 
 ---
 
@@ -18,7 +13,7 @@ This error occurs **during execution**, not at compile time.
 ```java
 import java.io.FileReader;
 
-class Example011RuntimeErrorExample1 {
+class Example011RuntimeErrorExample2 {
     public static void main(String[] args) {
         try {
             FileReader fr = new FileReader("names.txt"); // ❌ File may not exist
@@ -34,7 +29,7 @@ class Example011RuntimeErrorExample1 {
 
 ## 💬 Error Explanation
 If the file **`names.txt`** does not exist in the working directory,  
-the JVM will throw a **`FileNotFoundException`**, which is a **checked exception**.  
+the JVM will throw a **`FileNotFoundException`**, which is a **checked exception**.
 
 Example error message:
 ```
@@ -43,7 +38,7 @@ Exception in thread "main" java.io.FileNotFoundException: names.txt (The system 
     at java.io.FileInputStream.open(FileInputStream.java:213)
     at java.io.FileInputStream.<init>(FileInputStream.java:153)
     at java.io.FileReader.<init>(FileReader.java:75)
-    at Example011RuntimeErrorExample1.main(Example011RuntimeErrorExample1.java:6)
+    at Example011RuntimeErrorExample2.main(Example011RuntimeErrorExample2.java:6)
 ```
 
 Even though the program compiles fine, the error appears **only at run-time**, when Java attempts to access the missing file.
@@ -52,18 +47,34 @@ Even though the program compiles fine, the error appears **only at run-time**, w
 
 ## ✅ Correct Code
 ```java
-package Example011RuntimeErrorExample1;
+package Example011RuntimeErrorExample2;
 
-import java.io.FileReader;
-import java.io.FileNotFoundException;
+import java.io.*;
 
-public class Example011RuntimeErrorExample1Solution {
+public class Example011RuntimeErrorExample2Solution {
     public static void main(String[] args) {
-        try {
-            FileReader fr = new FileReader("names.txt"); // Try to open file
-            System.out.println("File opened successfully!");
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: The file 'names.txt' was not found.");
+        // ✅ Use the full absolute path to ensure file is found
+        String filePath = "E:\6. Study Material\class 1 -12\CLASS11-ISC-computer\Java-ICSE-Class11\Chapter 9 - Program Error Types and Basic Exception Handling\Example011RuntimeErrorExample2\names.txt";
+
+        File file = new File(filePath);
+        System.out.println("Looking for file in: " + file.getAbsolutePath());
+
+        // 🧩 Check if file exists before reading
+        if (!file.exists()) {
+            System.out.println("❌ Error: The file 'names.txt' was not found in this directory.");
+            return;
+        }
+
+        // 📖 Read file content safely using try-with-resources
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            System.out.println("✅ File opened successfully!\n");
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        } 
+        catch (IOException e) {
+            System.out.println("⚠️ Error reading the file: " + e.getMessage());
         }
     }
 }
@@ -72,25 +83,38 @@ public class Example011RuntimeErrorExample1Solution {
 ---
 
 ## 🧾 Explanation of Solution
-- The `FileReader` constructor throws a **checked exception** if the file doesn’t exist.  
-- To handle it properly, wrap the file access code inside a **try-catch** block.  
-- The `catch` block prints a meaningful error message instead of letting the program crash.
+| Concept | Explanation |
+|----------|--------------|
+| **Absolute Path** | Ensures Java knows the exact location of `names.txt`. No confusion about the working directory. |
+| **File Existence Check** | Prevents exceptions by checking `file.exists()` before trying to open it. |
+| **try-with-resources** | Automatically closes `BufferedReader` after use, avoiding resource leaks. |
+| **IOException Handling** | Catches and displays any read/close errors instead of crashing. |
 
 ---
 
-## ✅ Output (if file is missing)
+## ✅ Output (if file exists)
 ```
-Error: The file 'names.txt' was not found.
+Looking for file in: E:\6. Study Material\class 1 -12\CLASS11-ISC-computer\Java-ICSE-Class11\Chapter 9 - Program Error Types and Basic Exception Handling\Example011RuntimeErrorExample2\names.txt
+✅ File opened successfully!
+
+Rumman Ansari
+Java Programming
+Exception Handling Example
 ```
 
-If the file exists in the correct directory, the output will be:
+*(Output will vary depending on the contents of your `names.txt` file.)*
+
+---
+
+## ❌ Output (if file missing)
 ```
-File opened successfully!
+Looking for file in: E:\6. Study Material\class 1 -12\CLASS11-ISC-computer\Java-ICSE-Class11\Chapter 9 - Program Error Types and Basic Exception Handling\Example011RuntimeErrorExample2\names.txt
+❌ Error: The file 'names.txt' was not found in this directory.
 ```
 
 ---
 
 ## 🧠 Key Takeaway
-- **Run-time errors** like file-not-found happen while the program is executing.  
-- They can’t always be detected by the compiler.  
-- Always handle file I/O operations using **try-catch** to ensure your program doesn’t crash unexpectedly.
+- Use **absolute paths** during development to avoid file location confusion.  
+- Always use **try-with-resources** for safe file handling.  
+- Handle **checked exceptions** like `IOException` properly to make your code more robust and user-friendly.
