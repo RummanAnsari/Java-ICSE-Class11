@@ -82,7 +82,7 @@ public class ArraySumExample {
 
 ------------------------------------------------------------------------
 
-## 📝 Summary for Class 10 Students
+## 📝 Summary 
 
   Concept          Meaning
   ---------------- ----------------------------------------
