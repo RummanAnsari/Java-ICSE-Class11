@@ -105,7 +105,7 @@ The program **keeps running without crashing**.
 
 ------------------------------------------------------------------------
 
-## 📝 Summary for Class 10 Students
+## 📝 Summary 
 
   Concept            Meaning
   ------------------ --------------------------------------
