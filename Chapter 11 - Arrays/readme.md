@@ -1,4 +1,4 @@
-# ArraySumExample -- Easy Explanation for Class 10 Students
+# ArraySumExample -- Easy Explanation 
 
 This program shows how to **add all the numbers inside an array** using
 a simple **for loop** in Java.
