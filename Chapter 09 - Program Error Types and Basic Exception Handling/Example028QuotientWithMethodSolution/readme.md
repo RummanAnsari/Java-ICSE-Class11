@@ -1,4 +1,4 @@
-# QuotientWithMethod -- Easy Explanation for Class 10 Students
+# QuotientWithMethod -- Easy Explanation for Me and You
 
 This program teaches how to **divide two numbers safely** in Java and
 how to handle errors using **exception handling**.
